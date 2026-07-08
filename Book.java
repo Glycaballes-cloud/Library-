@@ -26,7 +26,10 @@ public class Book {
     }
 
     public void displayInfo() {
-        System.out.println("Title: " + title + "\nAuthor: " + author + "\nBorrowed: " + isBorrowed);
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+        System.out.println("Borrowed: " + isBorrowed);
+        System.out.println("-------------------------");
     }
     
 }
