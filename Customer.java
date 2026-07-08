@@ -21,6 +21,9 @@ public class Customer extends Person {
         borrowedBooks.remove(book);
     }
 
+    public boolean hasBorrowedBooks(Book book) {
+        return borrowedBooks.contains(book);
+    }
     public void displayBorrowedBooks() {
         System.out.println("Borrowed Books for " + getName() + ":");
         if (borrowedBooks.isEmpty()) {
@@ -32,8 +35,4 @@ public class Customer extends Person {
             }
         }
     }
-
-
-
-    
 }
