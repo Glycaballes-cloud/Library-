@@ -1,53 +1,51 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Library {
     private ArrayList<Book> books;
-    private ArrayList<Person> Person;
+    private ArrayList<Person> people;
 
     public Library() {
         books = new ArrayList<>();
-        Person = new ArrayList<>();
+        people = new ArrayList<>();
     }
 
     public void addBook(Book book) {
         books.add(book);
     }
-    public void addEmployee(Employee employee) {
-        Person.add(employee);
-    }
 
-    public void addCustomer(Customer customer) {
-        Person.add(customer);
+    public void addPerson(Person person) {
+        people.add(person);
     }
 
     public void displayBooks() {
-        System.out.println("=====Books in the Library===");
-        if (books.isEmpty()) {
-            System.out.println("No books available.");
-        } else {
-            for (Book book : books) {
-                book.displayInfo();
-            }
-        }
-    }
- 
-    public void lendBook(Customer customer, Book book) {
-        if (books.contains(book) && !book.isBorrowed()) {
-            book.setBorrowed(true);
-            customer.borrowBook(book);
-            System.out.println("Book lent to " + customer.getName() + ": " + book.getTitle());
-        } else {
-            System.out.println("Book is not available for lending.");
+        System.out.println("===== Library Books =====");
+        for (Book book : books) {
+            book.displayInfo();
         }
     }
 
-    public void returnBook(Customer customer, Book book) {
-        if (customer.Borrowed(book)) {
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void lendBook(Book book, Customer customer) {
+        if (!book.isBorrowed()) {
+            book.setBorrowed(true);
+            customer.borrowBook(book);
+            System.out.println("Book '" + book.getTitle() + "' has been lent to " + customer.getName() + ".");
+        } else {
+            System.out.println("Book '" + book.getTitle() + "' is not available for lending.");
+        }
+    }
+    
+    public void returnBook(Book book, Customer customer) {
+        if (customer.hasBorrowedBooks(book)) {
             book.setBorrowed(false);
             customer.returnBook(book);
-            System.out.println("Book returned by " + customer.getName() + ": " + book.getTitle());
+            System.out.println("Book '" + book.getTitle() + "' has been returned by " + customer.getName() + ".");
         } else {
-            System.out.println("This book was not borrowed by the customer.");
+            System.out.println(customer.getName() + " has not borrowed the book '" + book.getTitle() + "'.");
         }
     }
 }
